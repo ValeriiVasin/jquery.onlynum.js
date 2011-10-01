@@ -1,11 +1,18 @@
 (function() {
   $(function() {
-    return $('#ex1').onlynum({
+    $('#ex1').onlynum({
       min: 0,
       max: 25,
       afterKeyup: function() {
-        return alert($(this).val());
+        return console.log($(this).val());
       }
+    });
+    $('#ex2').onlynum({
+      min: 2010,
+      max: 2015
+    });
+    return $('#ex3').onlynum({
+      min: 15
     });
   });
 }).call(this);
