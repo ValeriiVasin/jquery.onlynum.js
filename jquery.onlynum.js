@@ -1,13 +1,14 @@
 (function() {
   (function($) {
     return $.fn.onlynum = function(options) {
-      var $this, blur, buffer, checkMax, checkMin, focus, keyup, numRegExp;
+      var $this, K, blur, buffer, checkMax, checkMin, focus, keyup, numRegExp;
       if (options == null) {
         options = {};
       }
       $this = this;
       buffer = 0;
       numRegExp = /^[\d]*$/;
+      K = function() {};
       focus = function() {
         return buffer = $(this).val();
       };
@@ -18,10 +19,11 @@
         var value;
         value = $(this).val();
         if (numRegExp.test(value)) {
-          return $(this).val(checkMax(value));
+          $(this).val(checkMax(value));
         } else {
-          return $(this).val(buffer);
+          $(this).val(buffer);
         }
+        return (options.afterKeyup || K).apply(this, arguments);
       };
       checkMax = function(value) {
         value = value > options.max ? options.max : options.max != null ? value : void 0;

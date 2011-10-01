@@ -4,6 +4,7 @@
     buffer = 0
     numRegExp = /^[\d]*$/
 
+    K = ->
     focus = -> buffer = $(this).val()
     blur = -> $(this).val checkMin($(this).val())
     keyup = ->
@@ -12,6 +13,7 @@
         $(this).val checkMax(value)
       else
         $(this).val buffer
+      (options.afterKeyup || K).apply(this, arguments)
     checkMax = (value) ->
       value = if value > options.max then options.max else value if options.max?
       value
