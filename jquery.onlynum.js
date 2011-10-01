@@ -1,20 +1,20 @@
 (function() {
   (function($) {
     return $.fn.onlynum = function(options) {
-      var $this, buffer, checkMax, checkMin, numRegExp, onBlur, onFocus, onKeyUp;
+      var $this, blur, buffer, checkMax, checkMin, focus, keyup, numRegExp;
       if (options == null) {
         options = {};
       }
       $this = this;
       buffer = 0;
       numRegExp = /^[\d]*$/;
-      onFocus = function() {
+      focus = function() {
         return buffer = $(this).val();
       };
-      onBlur = function() {
+      blur = function() {
         return $(this).val(checkMin($(this).val()));
       };
-      onKeyUp = function() {
+      keyup = function() {
         var value;
         value = $(this).val();
         if (numRegExp.test(value)) {
@@ -35,9 +35,9 @@
         return value;
       };
       return this.bind({
-        focus: onFocus,
-        blur: onBlur,
-        keyup: onKeyUp
+        focus: focus,
+        blur: blur,
+        keyup: keyup
       });
     };
   })(jQuery);

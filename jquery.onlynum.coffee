@@ -4,9 +4,9 @@
     buffer = 0
     numRegExp = /^[\d]*$/
 
-    onFocus = -> buffer = $(this).val()
-    onBlur = -> $(this).val checkMin($(this).val())
-    onKeyUp = ->
+    focus = -> buffer = $(this).val()
+    blur = -> $(this).val checkMin($(this).val())
+    keyup = ->
       value = $(this).val()
       if numRegExp.test value
         $(this).val checkMax(value)
@@ -20,5 +20,5 @@
         value = if value < options.min then options.min else value
         $(this).val value
       value
-    @bind focus: onFocus, blur: onBlur, keyup: onKeyUp
+    @bind {focus, blur, keyup}
 ) jQuery
