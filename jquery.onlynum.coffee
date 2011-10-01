@@ -10,17 +10,15 @@
     keyup = ->
       value = $(this).val()
       if numRegExp.test value
-        $(this).val checkMax(value)
+        value = checkMax(value)
+        buffer = value
       else
-        $(this).val buffer
+        value = buffer
+      $(this).val value
       (options.afterKeyup || K).apply(this, arguments) if typeof options.afterKeyup == 'function'
     checkMax = (value) ->
-      value = if value > options.max then options.max else value if options.max?
-      value
+      if options.max? and value > options.max then options.max else value
     checkMin = (value) ->
-      if options.min?
-        value = if value < options.min then options.min else value
-        $(this).val value
-      value
+      if options.min? and value < options.min then options.min else value
     @bind {focus, blur, keyup}
 ) jQuery

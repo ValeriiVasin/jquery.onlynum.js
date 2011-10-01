@@ -19,24 +19,29 @@
         var value;
         value = $(this).val();
         if (numRegExp.test(value)) {
-          $(this).val(checkMax(value));
+          value = checkMax(value);
+          buffer = value;
         } else {
-          $(this).val(buffer);
+          value = buffer;
         }
+        $(this).val(value);
         if (typeof options.afterKeyup === 'function') {
           return (options.afterKeyup || K).apply(this, arguments);
         }
       };
       checkMax = function(value) {
-        value = value > options.max ? options.max : options.max != null ? value : void 0;
-        return value;
+        if ((options.max != null) && value > options.max) {
+          return options.max;
+        } else {
+          return value;
+        }
       };
       checkMin = function(value) {
-        if (options.min != null) {
-          value = value < options.min ? options.min : value;
-          $(this).val(value);
+        if ((options.min != null) && value < options.min) {
+          return options.min;
+        } else {
+          return value;
         }
-        return value;
       };
       return this.bind({
         focus: focus,
