@@ -13,7 +13,7 @@
         $(this).val checkMax(value)
       else
         $(this).val buffer
-      (options.afterKeyup || K).apply(this, arguments)
+      (options.afterKeyup || K).apply(this, arguments) if typeof options.afterKeyup == 'function'
     checkMax = (value) ->
       value = if value > options.max then options.max else value if options.max?
       value

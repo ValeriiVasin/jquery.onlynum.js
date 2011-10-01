@@ -23,7 +23,9 @@
         } else {
           $(this).val(buffer);
         }
-        return (options.afterKeyup || K).apply(this, arguments);
+        if (typeof options.afterKeyup === 'function') {
+          return (options.afterKeyup || K).apply(this, arguments);
+        }
       };
       checkMax = function(value) {
         value = value > options.max ? options.max : options.max != null ? value : void 0;
